@@ -16,11 +16,9 @@ class Labyrinth:
 
 
     def load_data_map(self):
-        temp = int
         with open('maps.txt', 'r') as maps:
             for x, line in enumerate(maps):
                 for y, case in enumerate(line.strip()):
-                    temp = x , y
                     self.x = x
                     self.y = y
                     if case == " ":

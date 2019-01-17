@@ -2,6 +2,6 @@ XXXXXXXXXX
 XD  O    X
 X  XxxxXXX
 X        X
-X        X
+X   XXXXXX
 X        A
 XXXXXXXXXX
