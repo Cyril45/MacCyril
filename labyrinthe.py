@@ -6,7 +6,8 @@ class Labyrinth:
         self.start = [] #start position
         self.road = [] # list of position of roads
         self.wall = [] # list of position of wall
-
+        self.position = ()
+        self.end_player = False
         self.x = int
         self.y = int
 
@@ -26,6 +27,7 @@ class Labyrinth:
                         self.road.append((x, y))
                     elif case == "D": 
                         self.start.append((x, y))
+                        self.position = (x, y)
                     elif case == "A": 
                         self.end.append((x, y))
                     elif case =="O":
@@ -47,14 +49,17 @@ class Labyrinth:
                 self.full_map[x][y] = "M"
             else:
                 self.full_map[x][y]="O"
+
         for z in self.end:
             x,y =z
             if position == z:
                 self.full_map[x][y] = "M"
+                self.end_player = True
             else:
                 self.full_map[x][y] = "A"
+                
         for z in self.start:
-            x,y =z
+            x,y =z  
             if position == z:
                 self.full_map[x][y] = "M"
             else:
@@ -66,20 +71,96 @@ class Labyrinth:
                 self.full_map[x][y] = "M"
             else:
                 self.full_map[x][y] = " "
+
         for z in self.wall:
             x,y =z
             self.full_map[x][y] = "#"
     
-    def print_map(self, player_location):
-        self.load_data_user(player_location)
+    def print_map(self, position):
+        self.load_data_user(position)
         for a in self.full_map:
             print(a)
 
+    def deplacement(self, direction):
+        if direction == "s":
+            x, y = self.position
+            x +=1
+            self.position = (x,y)
+            try:
+                self.position != self.wall.index(self.position)
+                x, y = self.position
+                x -=1
+                self.position = (x,y)
+                self.print_map(self.position)
+                print("Vous ne pouvea pas traversée les murs")
+            except:
+                self.print_map(self.position)
 
+        elif direction == "z":
+            x, y = self.position
+            x -=1
+            self.position = (x,y)
+            try:
+                self.position != self.wall.index(self.position)
+                x, y = self.position
+                x +=1
+                self.position = (x,y)
+                self.print_map(self.position)
+                print("Vous ne pouvea pas traversée les murs")
+            except:
+                self.print_map(self.position)
+
+        elif direction == "q":
+            x, y = self.position
+            y -=1
+            self.position = (x,y)
+            try:
+                self.position != self.wall.index(self.position)
+                x, y = self.position
+                y +=1
+                self.position = (x,y)
+                self.print_map(self.position)
+                print("Vous ne pouvea pas traversée les murs")
+            except:
+                self.print_map(self.position)
+        elif direction == "d":
+            x, y = self.position
+            y +=1
+            self.position = (x,y)
+            try:
+                self.position != self.wall.index(self.position)
+                x, y = self.position
+                y -=1
+                self.position = (x,y)
+                self.print_map(self.position)
+                print("Vous ne pouvea pas traversée les murs")
+            except:
+                self.print_map(self.position)
+
+        elif direction == "exit":
+            self.end_player = True
+
+        else:
+
+            print("Merci d'utilser les touches suivantes\n \
+            z : pour un déplacement ver le haut\n \
+            s : pour un déplacement ver le bas\n \
+            q : pour un déplacement ver la gauche\n \
+            d : pour un déplacement ver la droite\n\n \
+            Exit : pour quitter")
+            self.print_map(self.position)
 
 def main():
     lab = Labyrinth()
-    player_location = (3, 2)
-    lab.print_map(player_location)
+    lab.print_map(lab.position)
+
+    while lab.end_player == False:
+        direction = input("enter: ")
+        lab.deplacement(direction.lower())
+
+    if lab.end_player == True and direction != "exit":
+        print("!!!!!!! Bravo vous êtes vainqueur !!!!!!!")
+    else:
+        print("vous étes partit avant la fin, Dommage !!!")
 
 main()

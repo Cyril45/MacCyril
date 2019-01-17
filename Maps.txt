@@ -1,5 +1,7 @@
-XDXXXX
-X  O X
-X  XXX
-X    A
-XXXXXX
+XXXXXXXXXX
+XD  O    X
+X  XxxxXXX
+X        X
+X        X
+X        A
+XXXXXXXXXX
