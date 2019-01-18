@@ -16,7 +16,7 @@ class Labyrinth:
 
 
     def load_data_map(self):
-        with open('maps.txt', 'r') as maps:
+        with open('map/maps.txt', 'r') as maps:
             for x, line in enumerate(maps):
                 for y, case in enumerate(line.strip()):
                     self.x = x
