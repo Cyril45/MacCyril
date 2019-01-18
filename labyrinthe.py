@@ -52,7 +52,11 @@ class Labyrinth:
             x,y =z
             if position == z:
                 self.full_map[x][y] = "M"
-                self.end_player = True
+
+                if not self.items :
+                    self.end_player = True
+                else:
+                    print("vous n'avez pas récupéré tout les objets")
             else:
                 self.full_map[x][y] = "A"
                 
@@ -83,57 +87,43 @@ class Labyrinth:
         if direction == "s":
             x, y = self.position
             x +=1
-            self.position = (x,y)
-            try:
-                self.position != self.wall.index(self.position)
-                x, y = self.position
+            if self.verif_position(x,y) == False:
                 x -=1
-                self.position = (x,y)
                 self.print_map(self.position)
-                print("Vous ne pouvea pas traversée les murs")
-            except:
+            else:
+                self.position = (x,y)
                 self.print_map(self.position)
 
         elif direction == "z":
             x, y = self.position
             x -=1
-            self.position = (x,y)
-            try:
-                self.position != self.wall.index(self.position)
-                x, y = self.position
+            if self.verif_position(x,y) == False:
                 x +=1
-                self.position = (x,y)
                 self.print_map(self.position)
-                print("Vous ne pouvea pas traversée les murs")
-            except:
+            else:
+
+                self.position = (x,y)
                 self.print_map(self.position)
 
         elif direction == "q":
             x, y = self.position
             y -=1
-            self.position = (x,y)
-            try:
-                self.position != self.wall.index(self.position)
-                x, y = self.position
+            if self.verif_position(x,y) == False:
                 y +=1
-                self.position = (x,y)
                 self.print_map(self.position)
-                print("Vous ne pouvea pas traversée les murs")
-            except:
+            else:
+                self.position = (x,y)
                 self.print_map(self.position)
         elif direction == "d":
             x, y = self.position
             y +=1
-            self.position = (x,y)
-            try:
-                self.position != self.wall.index(self.position)
-                x, y = self.position
+            if self.verif_position(x,y) == False:
                 y -=1
+                self.print_map(self.position)
+            else:
                 self.position = (x,y)
                 self.print_map(self.position)
-                print("Vous ne pouvea pas traversée les murs")
-            except:
-                self.print_map(self.position)
+
 
         elif direction == "exit":
             self.end_player = True
@@ -148,6 +138,24 @@ class Labyrinth:
             Exit : pour quitter")
             self.print_map(self.position)
 
+    def verif_position(self,position_x, position_y):
+        if position_x < 0 or position_x > self.x or position_y < 0 or position_y > self.y:
+            print("Vous ne pouvez pas sortir du labyrinthe")
+            return False
+        
+        elif ((position_x, position_y) in self.wall):
+            print("Vous ne pouvez pas traverser les murs")
+            return False
+        elif ((position_x, position_y) in self.items):
+            index = self.items.index((position_x, position_y))
+            r = self.items.pop(index)
+            self.road.append(r)
+            print("vous avez récupérer un objet")
+            return True
+        else:
+            return True
+
+
 def main():
     lab = Labyrinth()
     lab.print_map(lab.position)
@@ -159,6 +167,6 @@ def main():
     if lab.end_player == True and direction != "exit":
         print("!!!!!!! Bravo vous êtes vainqueur !!!!!!!")
     else:
-        print("vous étes partit avant la fin, Dommage !!!")
+        print("vous êtes partit avant la fin, Dommage !!!")
 
 main()
