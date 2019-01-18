@@ -100,7 +100,6 @@ class Move_map:
             self.player.end_player = True
 
         else:
-            print(self.player.message)
             print("Thank you for using the following touches")
             print(self.player.message)
             Print_map(self.player).printt(self.player.position)
