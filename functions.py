@@ -1,3 +1,6 @@
+from random import randrange
+
+
 class Var_init:
     def __init__(self):
         self.full_map = []  # map with all the items in place.
@@ -6,16 +9,18 @@ class Var_init:
         self.wall = []  # list of position of wall
         self.position = ()  # tuple contains player position
         self.end = ()  # tuple contains end position
+        self.end_player = False
+        self.dead = False
+        self.items_collect = 0
+        self.items_number = 3
+        self.x = None
+        self.y = None
         self.menu = ("\
             z : for an upward movement\n \
             s : for a downward movement\n \
             q : for a movement to the left\n \
             d : for movement to the right\n \
             exit to leave")
-        self.end_player = False
-        self.dead = False
-        self.x = None
-        self.y = None
         self.message_1 = "Thank you for using the following touches"
         self.message_2 = "You can’t get out of the maze"
         self.message_3 = "You can’t cross the walls"
@@ -48,19 +53,17 @@ class Initialize_map:
                     elif case == "A":
                         self.player.end = (x, y)
 
-                    elif case == "O":
-                        self.player.items.append((x, y))
-
                     else:
                         self.player.wall.append((x, y))
 
     def create_blank_map(self):
         self.player.full_map = [[""]]*(self.player.x+1)
-        numberlist = 0
+        for i, v in enumerate(self.player.full_map):
+            self.player.full_map[i] = [""]*(self.player.y+1)
 
-        while numberlist < (self.player.x+1):
-            self.player.full_map[numberlist] = [""]*(self.player.y+1)
-            numberlist += 1
+        while self.player.items_number > len(self.player.items):
+            pos_items = self.player.road.pop(randrange(0, len(self.player.road)))
+            self.player.items.append(pos_items)
 
 
 class Move_map:
@@ -102,9 +105,10 @@ class Move_map:
             return False
 
         elif ((position_x, position_y) in self.player.items):
-            index = self.player.items.index((position_x, position_y))
-            r = self.player.items.pop(index)
-            self.player.road.append(r)
+            collect_pos = self.player.items.index((position_x, position_y))
+            collect_values_items = self.player.items.pop(collect_pos)
+            self.player.road.append(collect_values_items)
+            self.player.items_collect += 1
             print(self.player.message_4)
             return True
 
@@ -118,7 +122,6 @@ class Print_map:
 
     def printt(self, position):
         self.load_data_user(position)
-
         for a in self.player.full_map:
             print(a)
 
@@ -126,7 +129,6 @@ class Print_map:
         if position == self.player.position:
             x, y = position
             self.player.full_map[x][y] = "M"
-
         else:
             x, y = self.player.position
             self.player.full_map[x][y] = " "
@@ -137,21 +139,17 @@ class Print_map:
 
             if not self.player.items:
                 self.player.end_player = True
-
             else:
                 self.player.end_player = True
                 self.player.dead = True
-
         else:
             x, y = self.player.end
             self.player.full_map[x][y] = "A"
 
         for z in self.player.items:
             x, y = z
-
             if position == z:
                 self.player.full_map[x][y] = "M"
-
             else:
                 self.player.full_map[x][y] = "O"
 
@@ -160,7 +158,6 @@ class Print_map:
 
             if position == z:
                 self.player.full_map[x][y] = "M"
-
             else:
                 self.player.full_map[x][y] = " "
 
