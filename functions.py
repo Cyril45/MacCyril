@@ -69,15 +69,20 @@ class Move_map:
 
     def move(self, direction):
         x, y = self.player.position
-        if direction == "s" and self.check_position(x+1, y): x+=1
+        if direction == "s" and self.check_position(x+1, y):
+            x += 1
 
-        elif direction == "z" and self.check_position(x-1, y): x -= 1
+        elif direction == "z" and self.check_position(x-1, y):
+            x -= 1
 
-        elif direction == "q" and self.check_position(x, y-1): y -= 1
+        elif direction == "q" and self.check_position(x, y-1):
+            y -= 1
 
-        elif direction == "d" and self.check_position(x, y+1): y += 1
+        elif direction == "d" and self.check_position(x, y+1):
+            y += 1
 
-        elif direction == "exit": self.player.end_player = True
+        elif direction == "exit":
+            self.player.end_player = True
 
         else:
             print(self.player.message_1)
@@ -88,7 +93,7 @@ class Move_map:
 
     def check_position(self, position_x, position_y):
         if position_x < 0 or position_y < 0 \
-          or position_x > self.player.x or position_y > self.player.y: 
+          or position_x > self.player.x or position_y > self.player.y:
             print(self.player.message_2)
             return False
 
