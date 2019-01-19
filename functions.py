@@ -3,11 +3,11 @@ class Var_init:
     def __init__(self):
         self.full_map = []  # map with all the items in place.
         self.items = []  # List of position of items
-        self.end = []  # end position
-        self.start = []  # start position
         self.road = []  # list of position of roads
         self.wall = []  # list of position of wall
-        self.position = ()
+        self.position = () # tuple contains player position
+        self.end = ()  # tuple contains end position
+        self.start = ()  # tuple contains start position
         self.message = ("\
             z : for an upward movement\n \
             s : for a downward movement\n \
@@ -31,21 +31,27 @@ class Initialize_map:
                 for y, case in enumerate(line.strip()):
                     self.player.x = x
                     self.player.y = y
+
                     if case == " ":
                         self.player.road.append((x, y))
+
                     elif case == "D":
-                        self.player.start.append((x, y))
+                        self.player.start = (x, y)
                         self.player.position = (x, y)
+
                     elif case == "A":
-                        self.player.end.append((x, y))
+                        self.player.end = (x, y)
+
                     elif case == "O":
                         self.player.items.append((x, y))
+
                     else:
                         self.player.wall.append((x, y))
 
     def create_blank_map(self):
         self.player.full_map = [[""]]*(self.player.x+1)
         numberlist = 0
+
         while numberlist < (self.player.x+1):
             self.player.full_map[numberlist] = [""]*(self.player.y+1)
             numberlist += 1
@@ -131,10 +137,29 @@ class Print_map:
 
     def printt(self, position):
         self.load_data_user(position)
+
         for a in self.player.full_map:
             print(a)
 
     def load_data_user(self, position):
+        if position == self.player.start:
+            x, y = self.player.start
+            self.player.full_map[x][y] = "M"
+        else:
+            x, y = self.player.start
+            self.player.full_map[x][y] = " "
+
+        if position == self.player.end:
+            x, y = self.player.end
+            self.player.full_map[x][y] = "M"
+            if not self.player.items:
+                self.player.end_player = True
+            else:
+                print("you have not recovered all the objects")
+        else:
+            x, y = self.player.end
+            self.player.full_map[x][y] = "A"
+
         for z in self.player.items:
             x, y = z
             if position == z:
@@ -142,29 +167,13 @@ class Print_map:
             else:
                 self.player.full_map[x][y] = "O"
 
-        for z in self.player.end:
-            x, y = z
-            if position == z:
-                self.player.full_map[x][y] = "M"
-                if not self.player.items:
-                    self.player.end_player = True
-                else:
-                    print("you have not recovered all the objects")
-            else:
-                self.player.full_map[x][y] = "A"
-
-        for z in self.player.start:
-            x, y = z
-            if position == z:
-                self.player.full_map[x][y] = "M"
-            else:
-                self.player.full_map[x][y] = " "
         for z in self.player.road:
             x, y = z
             if position == z:
                 self.player.full_map[x][y] = "M"
             else:
                 self.player.full_map[x][y] = " "
+
         for z in self.player.wall:
             x, y = z
             self.player.full_map[x][y] = "#"
