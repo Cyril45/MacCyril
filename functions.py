@@ -1,22 +1,28 @@
 class Var_init:
-
     def __init__(self):
         self.full_map = []  # map with all the items in place.
         self.items = []  # List of position of items
         self.road = []  # list of position of roads
         self.wall = []  # list of position of wall
-        self.position = () # tuple contains player position
+        self.position = ()  # tuple contains player position
         self.end = ()  # tuple contains end position
-        self.start = ()  # tuple contains start position
-        self.message = ("\
+        self.menu = ("\
             z : for an upward movement\n \
             s : for a downward movement\n \
             q : for a movement to the left\n \
-            d : for movement to the right\n\n \
-            Exit to leave")
+            d : for movement to the right\n \
+            exit to leave")
         self.end_player = False
-        self.x = int
-        self.y = int
+        self.dead = False
+        self.x = None
+        self.y = None
+        self.message_1 = "Thank you for using the following touches"
+        self.message_2 = "You can’t get out of the maze"
+        self.message_3 = "You can’t cross the walls"
+        self.message_4 = "You got back an object"
+        self.message_5 = "!!!!!!! Bravo you are victorious !!!!!!!"
+        self.message_6 = "You didn’t get all the objects you died"
+        self.message_7 = "You left before the end, Damage !!!"
 
 
 class Initialize_map:
@@ -36,8 +42,8 @@ class Initialize_map:
                         self.player.road.append((x, y))
 
                     elif case == "D":
-                        self.player.start = (x, y)
                         self.player.position = (x, y)
+                        self.player.road.append((x, y))
 
                     elif case == "A":
                         self.player.end = (x, y)
@@ -61,70 +67,40 @@ class Move_map:
     def __init__(self, player):
         self.player = player
 
-    def movement(self, direction):
-        if direction == "s":
-            x, y = self.player.position
-            x += 1
-            if self.check_position(x, y) is False:
-                x -= 1
-                Print_map(self.player).printt(self.player.position)
-            else:
-                self.player.position = (x, y)
-                Print_map(self.player).printt(self.player.position)
+    def move(self, direction):
+        x, y = self.player.position
+        if direction == "s" and self.check_position(x+1, y): x+=1
 
-        elif direction == "z":
-            x, y = self.player.position
-            x -= 1
-            if self.check_position(x, y) is False:
-                x += 1
-                Print_map(self.player).printt(self.player.position)
-            else:
-                self.player.position = (x, y)
-                Print_map(self.player).printt(self.player.position)
+        elif direction == "z" and self.check_position(x-1, y): x -= 1
 
-        elif direction == "q":
-            x, y = self.player.position
-            y -= 1
-            if self.check_position(x, y) is False:
-                y += 1
-                Print_map(self.player).printt(self.player.position)
-            else:
-                self.player.position = (x, y)
-                Print_map(self.player).printt(self.player.position)
+        elif direction == "q" and self.check_position(x, y-1): y -= 1
 
-        elif direction == "d":
-            x, y = self.player.position
-            y += 1
-            if self.check_position(x, y) is False:
-                y -= 1
-                Print_map(self.player).printt(self.player.position)
-            else:
-                self.player.position = (x, y)
-                Print_map(self.player).printt(self.player.position)
+        elif direction == "d" and self.check_position(x, y+1): y += 1
 
-        elif direction == "exit":
-            self.player.end_player = True
+        elif direction == "exit": self.player.end_player = True
 
         else:
-            print("Thank you for using the following touches")
-            print(self.player.message)
-            Print_map(self.player).printt(self.player.position)
+            print(self.player.message_1)
+            print(self.player.menu)
+
+        self.player.position = (x, y)
+        Print_map(self.player).printt(self.player.position)
 
     def check_position(self, position_x, position_y):
-        if position_x < 0 or position_y < 0 or \
-         position_x > self.player.x or position_y > self.player.y:
-            print("You can’t get out of the maze")
+        if position_x < 0 or position_y < 0 \
+          or position_x > self.player.x or position_y > self.player.y: 
+            print(self.player.message_2)
             return False
 
         elif ((position_x, position_y) in self.player.wall):
-            print("You can’t cross the walls")
+            print(self.player.message_3)
             return False
 
         elif ((position_x, position_y) in self.player.items):
             index = self.player.items.index((position_x, position_y))
             r = self.player.items.pop(index)
             self.player.road.append(r)
-            print("You got back an object")
+            print(self.player.message_4)
             return True
 
         else:
@@ -142,35 +118,44 @@ class Print_map:
             print(a)
 
     def load_data_user(self, position):
-        if position == self.player.start:
-            x, y = self.player.start
+        if position == self.player.position:
+            x, y = position
             self.player.full_map[x][y] = "M"
+
         else:
-            x, y = self.player.start
+            x, y = self.player.position
             self.player.full_map[x][y] = " "
 
         if position == self.player.end:
-            x, y = self.player.end
+            x, y = position
             self.player.full_map[x][y] = "M"
+
             if not self.player.items:
                 self.player.end_player = True
+
             else:
-                print("you have not recovered all the objects")
+                self.player.end_player = True
+                self.player.dead = True
+
         else:
             x, y = self.player.end
             self.player.full_map[x][y] = "A"
 
         for z in self.player.items:
             x, y = z
+
             if position == z:
                 self.player.full_map[x][y] = "M"
+
             else:
                 self.player.full_map[x][y] = "O"
 
         for z in self.player.road:
             x, y = z
+
             if position == z:
                 self.player.full_map[x][y] = "M"
+
             else:
                 self.player.full_map[x][y] = " "
 
