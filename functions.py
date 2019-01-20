@@ -28,6 +28,7 @@ class Var_init:
         self.message_5 = "!!!!!!! Bravo you are victorious !!!!!!!"
         self.message_6 = "You didn’t get all the objects you died"
         self.message_7 = "You left before the end, Damage !!!"
+        self.message_items = "You have recovered {}/{} items"
 
 
 class Initialize_map:
@@ -63,7 +64,9 @@ class Initialize_map:
 
         while self.player.items_number > len(self.player.items):
             pos_items = self.player.road.pop(randrange(0, len(self.player.road)))
-            self.player.items.append(pos_items)
+            if pos_items != self.player.position:
+                self.player.items.append(pos_items)
+            
 
 
 class Move_map:
@@ -122,6 +125,7 @@ class Print_map:
 
     def printt(self, position):
         self.load_data_user(position)
+        print(self.player.message_items.format(self.player.items_collect, self.player.items_number))
         for a in self.player.full_map:
             print(a)
 
