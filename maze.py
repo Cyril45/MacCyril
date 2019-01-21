@@ -6,7 +6,7 @@ def main():
     player = functions.Var_init()
     functions.Initialize_map(player)
     print(player.menu)
-    functions.Print_map(player).printt(player.position)
+    functions.Print_map(player).show(player.position)
 
     while player.end_player is False:
         direction = input("enter: ")

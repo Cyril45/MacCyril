@@ -1,4 +1,4 @@
-from random import randrange
+from random import randint
 
 
 class Var_init:
@@ -63,10 +63,11 @@ class Initialize_map:
             self.player.full_map[i] = [""]*(self.player.y+1)
 
         while self.player.items_number > len(self.player.items):
-            pos_items = self.player.road.pop(randrange(0, len(self.player.road)))
-            if pos_items != self.player.position:
-                self.player.items.append(pos_items)
-            
+            num_random = randint(0, len(self.player.road))
+
+            if self.player.road[num_random] != self.player.position:
+                collect_items = self.player.road.pop(num_random)
+                self.player.items.append(collect_items)
 
 
 class Move_map:
@@ -95,7 +96,7 @@ class Move_map:
             print(self.player.menu)
 
         self.player.position = (x, y)
-        Print_map(self.player).printt(self.player.position)
+        Print_map(self.player).show(self.player.position)
 
     def check_position(self, position_x, position_y):
         if position_x < 0 or position_y < 0 \
@@ -123,13 +124,17 @@ class Print_map:
     def __init__(self, player):
         self.player = player
 
-    def printt(self, position):
-        self.load_data_user(position)
-        print(self.player.message_items.format(self.player.items_collect, self.player.items_number))
+    def show(self, position):
+        self.load_position(position)
+        print(
+            self.player.message_items.format
+            (self.player.items_collect, self.player.items_number)
+        )
+
         for a in self.player.full_map:
             print(a)
 
-    def load_data_user(self, position):
+    def load_position(self, position):
         if position == self.player.position:
             x, y = position
             self.player.full_map[x][y] = "M"
