@@ -1,26 +1,29 @@
-import functions
+#! /usr/bin/env python3
+# coding: utf-8
+
+from framework import user
 
 
 def main():
 
-    player = functions.Var_init()
-    functions.Initialize_map(player)
-    print(player.menu)
-    functions.Print_map(player).show(player.position)
-
-    while player.end_player is False:
+    player = user.User()
+    while player.end is False:
+        print(player.objects_collect, player.laby.objects_numbers)
+        player.laby.view_map()
         direction = input("enter: ")
-        functions.Move_map(player).move(direction.lower())
+        player.move(direction)
 
-    if player.end_player is True and \
-       direction != "exit" and player.dead is False:
-        print(player.message_5)
+    player.laby.view_map()
 
-    elif player.dead is True:
-        print(player.message_6)
+    if player.end and direction != "exit" and player.dead is False:
+        print("You win")
+
+    elif player.dead:
+        print("You lose")
 
     else:
-        print(player.message_7)
+        print("You have to leave")
 
 
-main()
+if __name__ == "__main__":
+    main()

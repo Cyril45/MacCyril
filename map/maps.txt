@@ -1,7 +1,7 @@
-XDXXXXXXXX
-X        X
-X   xxxxXX
-X        X
-X   XXXXXX
-X        A
-XXXXXXXXXX
+#D########
+#        #
+#   ######
+#        #
+#   ######
+#        A
+##########
