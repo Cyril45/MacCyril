@@ -13,7 +13,7 @@ class Objects:
         while i < self.lab.objects_numbers:
             random_x = randint(0, self.lab.x)
             random_y = randint(0, self.lab.y)
-            if self.lab.full_map[random_x][random_y] == " ":
+            if self.lab.full_map[random_x][random_y] == " " and self.lab.full_map[random_x][random_y] != "D":
                 self.lab.full_map[random_x][random_y] = "O"
                 i += 1
 

@@ -2,16 +2,20 @@
 # coding: utf-8
 
 from framework import objects
-
+from framework import user
 
 class Laby:
-    def __init__(self, user):
+    def __init__(self):
         self.full_map = []  # map with all the items in place.
         self.objects_numbers = 3
         self.x = None
         self.y = None
-        self.user = user
+
+
+        self.user = user.User(self)
         self.objects = objects.Objects(self)
+
+
         self.load_data_map()
         self.objects.random_objects()
 

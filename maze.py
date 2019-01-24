@@ -1,24 +1,24 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-from framework import user
+from framework import laby
 
 
 def main():
 
-    player = user.User()
-    while player.end is False:
-        print(player.objects_collect, player.laby.objects_numbers)
-        player.laby.view_map()
+    player = laby.Laby()
+    while player.user.end is False:
+        print(player.user.objects_collect, player.objects_numbers)
+        player.view_map()
         direction = input("enter: ")
-        player.move(direction)
+        player.user.move(direction)
 
-    player.laby.view_map()
+    player.view_map()
 
-    if player.end and direction != "exit" and player.dead is False:
+    if player.user.end and direction != "exit" and player.user.dead is False:
         print("You win")
 
-    elif player.dead:
+    elif player.user.dead:
         print("You lose")
 
     else:

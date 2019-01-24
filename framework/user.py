@@ -1,17 +1,16 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-from framework import laby
 
 
 class User:
-    def __init__(self):
+    def __init__(self, laby):
         self.objects_collect = 0
         self.end = False
         self.position = ()
         self.user = False
         self.dead = False
-        self.laby = laby.Laby(self)
+        self.laby = laby
 
     def move(self, direction):
         x, y = self.position
@@ -32,4 +31,4 @@ class User:
             news_pos = (x, y)
             self.laby.modify_map(news_pos)
         elif direction == "exit":
-            self.end_player = True
+            self.end = True
