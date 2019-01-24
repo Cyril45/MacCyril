@@ -3,6 +3,7 @@
 
 from framework import objects
 from framework import user
+from graphics import graphics
 
 class Laby:
     def __init__(self):
@@ -11,13 +12,11 @@ class Laby:
         self.x = None
         self.y = None
 
-
         self.user = user.User(self)
         self.objects = objects.Objects(self)
-
-
         self.load_data_map()
         self.objects.random_objects()
+        self.graphics = graphics.Graphics(self)
 
     def load_data_map(self):
         with open("map/maps.txt") as maps:
@@ -27,7 +26,7 @@ class Laby:
                 for y, case in enumerate(line.strip()):
                     self.y = y
                     if case == "D":
-                        self.full_map[x].insert(y, "M")
+                        self.full_map[x].insert(y, "D")
                         self.user.position = (x, y)
                     elif case == "A":
                         self.full_map[x].insert(y, "A")
@@ -38,8 +37,7 @@ class Laby:
 
     def check_position(self, position):
         x, y = position
-        if self.full_map[x][y] == " " or \
-           self.full_map[x][y] == "A" or self.full_map[x][y] == "O":
+        if self.full_map[x][y] in (" ", "A", "O0","O1","O2"):
             return True
         else:
             return False
@@ -56,7 +54,3 @@ class Laby:
             self.full_map[old_x][old_y] = " "
             self.full_map[news_x][news_y] = "M"
             self.user.position = position
-
-    def view_map(self):
-        for a in self.full_map:
-            print(a)
