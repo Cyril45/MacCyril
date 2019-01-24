@@ -26,7 +26,7 @@ class Laby:
                 for y, case in enumerate(line.strip()):
                     self.y = y
                     if case == "D":
-                        self.full_map[x].insert(y, "D")
+                        self.full_map[x].insert(y, "M")
                         self.user.position = (x, y)
                     elif case == "A":
                         self.full_map[x].insert(y, "A")

@@ -8,13 +8,14 @@ class Graphics:
     def __init__(self, laby):
         pygame.init()
         self.laby = laby
-
+        print(self.laby.user.objects_collect)
         self.dim_sprite = 40
 
         self.largeur = (self.laby.y+1) * self.dim_sprite
         self.longueur = (self.laby.x+1) * self.dim_sprite
 
         self.fenetre = pygame.display.set_mode((self.largeur, self.longueur+50))
+
         self.welcome = pygame.image.load("ressource/tile-crusader-logo.png").convert()
 
         self.fond = pygame.image.load("ressource/sol.png").convert()
@@ -46,25 +47,34 @@ class Graphics:
         pygame.display.flip()
 
     def update_views(self):
+        self.fenetre.fill((30, 28, 30))
         for x, line in enumerate(self.laby.full_map):
             for y, case in enumerate(line):
                 x_sprite = x * self.dim_sprite
                 y_sprite = y * self.dim_sprite
                 if case == "A":
+                    self.fenetre.blit(self.fond, (y_sprite, x_sprite))
                     self.fenetre.blit(self.arriver, (y_sprite,  x_sprite))
                 if case == "#":
                     self.fenetre.blit(self.mur, (y_sprite, x_sprite))
-                if case == "D":
-                    self.fenetre.blit(self.depart, (y_sprite, x_sprite))
                 if case == "M":
+                    self.fenetre.blit(self.fond, (y_sprite, x_sprite))
                     self.fenetre.blit(self.perso, (y_sprite, x_sprite))
                 if case == " ":
                     self.fenetre.blit(self.fond, (y_sprite, x_sprite))
                 if case == "O0":
+                    self.fenetre.blit(self.fond, (y_sprite, x_sprite))
                     self.fenetre.blit(self.objet0, (y_sprite, x_sprite))
                 if case == "O1":
+                    self.fenetre.blit(self.fond, (y_sprite, x_sprite))
                     self.fenetre.blit(self.objet1, (y_sprite, x_sprite))
                 if case == "O2":
+                    self.fenetre.blit(self.fond, (y_sprite, x_sprite))
                     self.fenetre.blit(self.objet2, (y_sprite, x_sprite))
+        
+        font = pygame.font.SysFont("comicsansms", 72)
+        text = font.render("Items recovered : " + str(self.laby.user.objects_collect), True, (255, 255, 255))
+        text = pygame.transform.scale(text, (200, 40))
+        self.fenetre.blit(text,(0,self.longueur))
 
         pygame.display.flip()
