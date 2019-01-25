@@ -5,11 +5,12 @@ class User:
     def __init__(self, laby):
         self.objects_collect = 0
         self.end = False
-        self.position = ()
         self.dead = False
+
+        self.position = ()
         self.laby = laby
 
-    def move(self, direction =""):
+    def move(self, direction):
         x, y = self.position
         if direction == "DOWN":
             x += 1
@@ -27,5 +28,3 @@ class User:
             y += 1
             news_pos = (x, y)
             self.laby.modify_map(news_pos)
-        elif direction == "EXIT":
-            self.end = True

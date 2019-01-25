@@ -30,16 +30,19 @@ class Laby:
                         self.user.position = (x, y)
                     elif case == "A":
                         self.full_map[x].insert(y, "A")
-                    elif case == " ":
-                        self.full_map[x].insert(y, " ")
+                    elif case == "_":
+                        self.full_map[x].insert(y, "_")
                     elif case == "#":
                         self.full_map[x].insert(y, "#")
 
     def check_position(self, position):
         x, y = position
-        if self.full_map[x][y] in (" ", "A", "O0","O1","O2"):
-            return True
-        else:
+        try:
+            if self.full_map[x][y] not in "#" and x <= self.x and y <= self.y and x >= 0 and y >= 0:
+                return True
+            else:
+                return False
+        except:
             return False
 
     def modify_map(self, position):
@@ -51,6 +54,6 @@ class Laby:
                 if self.user.objects_collect < self.objects_numbers:
                     self.user.dead = True
                 self.user.end = True
-            self.full_map[old_x][old_y] = " "
+            self.full_map[old_x][old_y] = "_"
             self.full_map[news_x][news_y] = "M"
             self.user.position = position
