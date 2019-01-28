@@ -4,6 +4,7 @@
 from framework import laby
 import pygame
 
+
 def main():
     start = True
     welcome = True
@@ -18,14 +19,17 @@ def main():
         if welcome:
             welcome, start = player.graphics.welcome_game(welcome, start)
 
-        if player.user.dead is False and welcome is False and player.user.end is False:
+        if player.user.dead is False \
+           and welcome is False and player.user.end is False:
             start = player.graphics.play_game(start)
 
         if player.user.dead and player.user.end:
-            start, create_player = player.graphics.lose_game(start, create_player)
+            start, create_player = \
+              player.graphics.lose_game(start, create_player)
 
         if player.user.dead is False and player.user.end:
-            start, create_player = player.graphics.win_game(start, create_player)
+            start, create_player = \
+              player.graphics.win_game(start, create_player)
 
 
 if __name__ == "__main__":

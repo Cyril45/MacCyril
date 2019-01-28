@@ -5,6 +5,7 @@ from framework import objects
 from framework import user
 from graphics import graphics
 
+
 class Laby:
     def __init__(self):
         self.full_map = []  # map with all the items in place.
@@ -38,11 +39,12 @@ class Laby:
     def check_position(self, position):
         x, y = position
         try:
-            if self.full_map[x][y] not in "#" and x <= self.x and y <= self.y and x >= 0 and y >= 0:
+            if self.full_map[x][y] not in "#" \
+              and x <= self.x and y <= self.y and x >= 0 and y >= 0:
                 return True
             else:
                 return False
-        except:
+        except IndexError:
             return False
 
     def modify_map(self, position):

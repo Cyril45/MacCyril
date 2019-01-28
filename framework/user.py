@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+
 class User:
     def __init__(self, laby):
         self.objects_collect = 0
