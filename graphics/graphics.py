@@ -6,8 +6,11 @@ from config import constants
 
 
 class Graphics:
+    """ It is a display class, it allows the display of the various
+    elements received"""
 
     def __init__(self, laby):
+        """ Constructor initializes window and images required for display"""
         self.laby = laby
         pygame.init()
 
@@ -59,6 +62,8 @@ class Graphics:
             (self.size_image, self.size_image))
 
     def welcome_game(self, welcome, start):
+        """ This method allows to display the first home window,
+        with the features of the game"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 start = False
@@ -78,6 +83,7 @@ class Graphics:
         return welcome, start
 
     def win_game(self, start, create_player):
+        """ This method displays the victory window."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 start = False
@@ -104,6 +110,7 @@ class Graphics:
         return start, create_player
 
     def lose_game(self, start, create_player):
+        """ This method displays the losing window."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 start = False
@@ -131,6 +138,8 @@ class Graphics:
         return start, create_player
 
     def play_game(self, start):
+        """ This method allows you to take into account the buttons for
+        movement in the main window of the game"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 start = False
@@ -149,6 +158,8 @@ class Graphics:
         return start
 
     def update_views_map(self):
+        """ This method modifies the display of the maze, so that the player’s
+        movements are visible."""
         pygame.display.set_mode((self.width, (self.height+60)))
         self.window.fill((30, 28, 30))
         for x, line in enumerate(self.laby.full_map):

@@ -1,6 +1,8 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+""" Loads the editable data by the player """
+
 # config maze
 windows_title = "labyrinthe"
 size_image = 40  # Dimensions in pixel

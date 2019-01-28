@@ -7,7 +7,10 @@ from graphics import graphics
 
 
 class Laby:
+    """This class initializes all maze data"""
     def __init__(self):
+        """This manufacturer initializes the information necessary for the
+        maze as well as the objects necessary for its proper functioning."""
         self.full_map = []  # map with all the items in place.
         self.objects_numbers = 3
         self.x = None
@@ -20,6 +23,7 @@ class Laby:
         self.graphics = graphics.Graphics(self)
 
     def load_data_map(self):
+        """This method retrieves map information"""
         with open("map/maps.txt") as maps:
             for x, line in enumerate(maps):
                 self.x = x
@@ -37,6 +41,8 @@ class Laby:
                         self.full_map[x].insert(y, "#")
 
     def check_position(self, position):
+        """ This method checks if the position requested by the player is
+        contained in the map """
         x, y = position
         try:
             if self.full_map[x][y] not in "#" \
@@ -48,6 +54,7 @@ class Laby:
             return False
 
     def modify_map(self, position):
+        """ This method modifies the map after the player moves."""
         old_x, old_y = self.user.position
         news_x, news_y = position
         if self.check_position(position):
