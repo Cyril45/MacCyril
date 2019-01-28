@@ -18,7 +18,7 @@ The program is standalone, that it can be run on any computer.
 
 
 
-# Installation and play
+## Installation and play
 
 Install |
 --- |
