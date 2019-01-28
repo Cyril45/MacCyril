@@ -3,7 +3,7 @@
 
 from framework import objects
 from framework import user
-from graphics import graphics
+from views import graphics
 
 
 class Laby:
