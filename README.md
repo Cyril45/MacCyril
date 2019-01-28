@@ -1,5 +1,5 @@
 <h1 align="center"> Maze MacGyver </h1>
-<p align="center"><img src="images/screen.png"></p>
+<p align="center"><img src="images/screen.PNG"></p>
 
  <h2 align="center">Help MacGyver escape!</h2>
 
