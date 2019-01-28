@@ -24,6 +24,6 @@ Install |
 --- |
 Launch **install.py** |
 
-Play |
+Play    |
 --- |
 Launch **start.py** |
