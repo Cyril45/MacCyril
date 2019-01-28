@@ -22,8 +22,8 @@ The program is standalone, that it can be run on any computer.
 
 Install |
 --- |
-Launch **install.py** |
+Launch **python install.py** |
 
 Play    |
 --- |
-Launch **start.py** |
+Launch **python start.py** |
