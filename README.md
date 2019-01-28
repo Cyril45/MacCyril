@@ -4,9 +4,9 @@
  <h2 align="center">Help MacGyver escape!</h2>
 
 ## Features
-There is only one level, the structure can be modified in map/map txt.
+There is only one level, the structure can be modified in map/map.txt.
 
-MacGyver is controlled by the keyboard directional keys.:arrow_left: :arrow_up: :arrow_right: :arrow_down:
+MacGyver is controlled by the keyboard directional keys: :arrow_left: :arrow_up: :arrow_right: :arrow_down:
 
 The objects are randomly distributed in the maze and will change location at each new part.
 
