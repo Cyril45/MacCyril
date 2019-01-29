@@ -63,6 +63,7 @@ class Laby:
                 if self.user.objects_collect < self.objects_numbers:
                     self.user.dead = True
                 self.user.end = True
-            self.full_map[old_x][old_y] = "_"
-            self.full_map[news_x][news_y] = "M"
-            self.user.position = position
+            else:
+                self.full_map[old_x][old_y] = "_"
+                self.full_map[news_x][news_y] = "M"
+                self.user.position = position
