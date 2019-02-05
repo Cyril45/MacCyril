@@ -24,6 +24,6 @@ Install |
 --- |
 Launch **python install.py** |
 
-Play    |
---- |
+## play
+
 Launch **python start.py** |
