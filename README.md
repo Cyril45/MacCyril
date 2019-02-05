@@ -17,13 +17,14 @@ You win if you retrieve all the objects before you go to the guard or you lose
 The program is standalone, that it can be run on any computer.
 
 
+## Dependency
 
-## Installation and play
+The required dependencies are indicated in the **requirement.txt** file
 
-Install |
---- |
-Launch **python install.py** |
+## Installation virtual environment (pypenv)
 
-## play
+Launch **pypenv install** 
 
-Launch **python start.py** |
+## Play
+
+Launch **python start.py**

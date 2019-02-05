@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+"""This module contains all classes for the player"""
 
 class User:
     """This class creates a player"""
@@ -17,20 +18,20 @@ class User:
 
     def move(self, direction):
         """This method changes the player’s position"""
-        x, y = self.position
+        x_axis, y_axis = self.position
         if direction == "DOWN":
-            x += 1
-            news_pos = (x, y)
+            x_axis += 1
+            news_pos = (x_axis, y_axis)
             self.laby.modify_map(news_pos)
         elif direction == "UP":
-            x -= 1
-            news_pos = (x, y)
+            x_axis -= 1
+            news_pos = (x_axis, y_axis)
             self.laby.modify_map(news_pos)
         elif direction == "LEFT":
-            y -= 1
-            news_pos = (x, y)
+            y_axis -= 1
+            news_pos = (x_axis, y_axis)
             self.laby.modify_map(news_pos)
         elif direction == "RIGHT":
-            y += 1
-            news_pos = (x, y)
+            y_axis += 1
+            news_pos = (x_axis, y_axis)
             self.laby.modify_map(news_pos)

@@ -1,8 +1,10 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+"""This module contains all graphic classes"""
+
 import pygame
-from config import constants
+import config.constants as cta
 
 
 class Graphics:
@@ -15,48 +17,48 @@ class Graphics:
         pygame.init()
 
         # Initialize window
-        self.size_image = constants.size_image
-        self.width = (self.laby.y+1) * self.size_image
-        self.height = (self.laby.x+1) * self.size_image
+        self.size_image = cta.SIZE_IMAGE
+        self.width = (self.laby.y_axis+1) * self.size_image
+        self.height = (self.laby.x_axis+1) * self.size_image
         self.window = pygame.display.set_mode((0, 0))
-        self.icone = pygame.image.load(constants.icone).convert_alpha()
-        pygame.display.set_caption(constants.windows_title)
+        self.icone = pygame.image.load(cta.ICONE).convert_alpha()
+        pygame.display.set_caption(cta.WINDOWS_TITLE)
         pygame.display.set_icon(self.icone)
 
         # Initialize images
-        self.banner = pygame.image.load(constants.banner).convert()
+        self.banner = pygame.image.load(cta.BANNER).convert()
 
-        self.background = pygame.image.load(constants.background).convert()
+        self.background = pygame.image.load(cta.BACKGROUND).convert()
         self.background = pygame.transform.scale(
             self.background,
             (self.size_image, self.size_image))
 
-        self.walls = pygame.image.load(constants.walls).convert()
+        self.walls = pygame.image.load(cta.WALLS).convert()
         self.walls = pygame.transform.scale(
             self.walls,
             (self.size_image, self.size_image))
 
-        self.hero = pygame.image.load(constants.hero).convert_alpha()
+        self.hero = pygame.image.load(cta.HERO).convert_alpha()
         self.hero = pygame.transform.scale(
             self.hero,
             (self.size_image, self.size_image))
 
-        self.guardian = pygame.image.load(constants.guardian).convert_alpha()
+        self.guardian = pygame.image.load(cta.GUARDIAN).convert_alpha()
         self.guardian = pygame.transform.scale(
             self.guardian,
             (self.size_image, self.size_image))
 
-        self.object0 = pygame.image.load(constants.object0).convert_alpha()
+        self.object0 = pygame.image.load(cta.OBJECT0).convert_alpha()
         self.object0 = pygame.transform.scale(
             self.object0,
             (self.size_image, self.size_image))
 
-        self.object1 = pygame.image.load(constants.object1).convert_alpha()
+        self.object1 = pygame.image.load(cta.OBJECT1).convert_alpha()
         self.object1 = pygame.transform.scale(
             self.object1,
             (self.size_image, self.size_image))
 
-        self.object2 = pygame.image.load(constants.object2).convert_alpha()
+        self.object2 = pygame.image.load(cta.OBJECT2).convert_alpha()
         self.object2 = pygame.transform.scale(
             self.object2,
             (self.size_image, self.size_image))
@@ -162,13 +164,13 @@ class Graphics:
         movements are visible."""
         pygame.display.set_mode((self.width, (self.height+60)))
         self.window.fill((30, 28, 30))
-        for x, line in enumerate(self.laby.full_map):
-            for y, case in enumerate(line):
-                x_sprite = x * self.size_image
-                y_sprite = y * self.size_image
+        for x_axis, line in enumerate(self.laby.full_map):
+            for y_axis, case in enumerate(line):
+                x_sprite = x_axis * self.size_image
+                y_sprite = y_axis * self.size_image
                 if case == "A":
                     self.window.blit(self.background, (y_sprite, x_sprite))
-                    self.window.blit(self.guardian, (y_sprite,  x_sprite))
+                    self.window.blit(self.guardian, (y_sprite, x_sprite))
                 if case == "#":
                     self.window.blit(self.walls, (y_sprite, x_sprite))
                 if case == "M":

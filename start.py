@@ -1,19 +1,21 @@
 #! /usr/bin/env python3
 # coding: utf-8
+"""This module contains the main launch elements of the code."""
 
-from framework import laby
 import pygame
+from framework.laby import Laby
 
 
 def main():
+    """This function is the function that allows to launch the program."""
     start = True
     welcome = True
     create_player = False
-    player = laby.Laby()
+    player = Laby()
     while start:
         pygame.time.Clock().tick(20)
         if create_player:
-            player = laby.Laby()
+            player = Laby()
             create_player = False
 
         if welcome:
