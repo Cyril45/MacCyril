@@ -5,6 +5,7 @@
 
 from framework.obj import Obj
 from framework.user import User
+
 from views.graphics import Graphics
 
 
@@ -52,8 +53,9 @@ class Laby:
         contained in the map """
         x_axis, y_axis = position
         try:
-            return bool(self.full_map[x_axis][y_axis] not in "#" \
-              and x_axis <= self.x_axis and y_axis <= self.y_axis and x_axis >= 0 and y_axis >= 0)
+            return bool(self.full_map[x_axis][y_axis] not in "#"
+                        and x_axis <= self.x_axis and y_axis <= self.y_axis
+                        and x_axis >= 0 and y_axis >= 0)
 
         except IndexError:
             return False
