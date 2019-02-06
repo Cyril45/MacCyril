@@ -26,8 +26,19 @@ class Graphics:
         pygame.display.set_icon(self.icone)
 
         # Initialize images
-        self.banner = pygame.image.load(cta.BANNER).convert()
+        self.load_img()
+        self.resize_img()
 
+    def resize_img(self):
+        """This method resizes images for the maze"""
+        for i in self.dict_img:
+            recup = self.dict_img[i]
+            self.dict_img[i] = pygame.transform.scale(
+                recup, (self.size_image, self.size_image))
+
+    def load_img(self):
+        """This method loads all images for the maze"""
+        self.banner = pygame.image.load(cta.BANNER).convert()
         self.dict_img = {
             "background": pygame.image.load(cta.BACKGROUND).convert(),
             "walls": pygame.image.load(cta.WALLS).convert(),
@@ -37,14 +48,7 @@ class Graphics:
             "object1": pygame.image.load(cta.OBJECT1).convert_alpha(),
             "object2": pygame.image.load(cta.OBJECT2).convert_alpha(),
         }
-        self.resize_img()
 
-    def resize_img(self):
-        """This method resizes all images for the maze"""
-        for i in self.dict_img:
-            recup = self.dict_img[i]
-            self.dict_img[i] = pygame.transform.scale(
-                recup, (self.size_image, self.size_image))
 
     def welcome_game(self, welcome, start):
         """ This method allows to display the first home window,
