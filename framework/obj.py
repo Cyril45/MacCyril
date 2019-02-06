@@ -17,10 +17,10 @@ class Obj:
 
     def random_objects(self):
         """This method randomly generates objects in available map spaces"""
-        i = 0
-        while i < 1:
+        i = True
+        while i:
             random_x = randint(0, self.laby.x_axis)
             random_y = randint(0, self.laby.y_axis)
             if self.laby.full_map[random_x][random_y] == "_":
                 self.laby.full_map[random_x][random_y] = "O" + str(self.i)
-                i += 1
+                i = False

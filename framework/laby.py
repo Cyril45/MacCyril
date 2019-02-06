@@ -54,8 +54,8 @@ class Laby:
         x_axis, y_axis = position
         try:
             return bool(self.full_map[x_axis][y_axis] not in "#"
-                        and x_axis <= self.x_axis and y_axis <= self.y_axis
-                        and x_axis >= 0 and y_axis >= 0)
+                        and 0 <= x_axis <= self.x_axis
+                        and 0 <= y_axis <= self.y_axis)
 
         except IndexError:
             return False
