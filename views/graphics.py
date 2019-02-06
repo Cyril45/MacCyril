@@ -28,40 +28,23 @@ class Graphics:
         # Initialize images
         self.banner = pygame.image.load(cta.BANNER).convert()
 
-        self.background = pygame.image.load(cta.BACKGROUND).convert()
-        self.background = pygame.transform.scale(
-            self.background,
-            (self.size_image, self.size_image))
+        self.dict_img = {
+            "background": pygame.image.load(cta.BACKGROUND).convert(),
+            "walls": pygame.image.load(cta.WALLS).convert(),
+            "hero": pygame.image.load(cta.HERO).convert_alpha(),
+            "guardian": pygame.image.load(cta.GUARDIAN).convert_alpha(),
+            "object0": pygame.image.load(cta.OBJECT0).convert_alpha(),
+            "object1": pygame.image.load(cta.OBJECT1).convert_alpha(),
+            "object2": pygame.image.load(cta.OBJECT2).convert_alpha(),
+        }
+        self.resize_img()
 
-        self.walls = pygame.image.load(cta.WALLS).convert()
-        self.walls = pygame.transform.scale(
-            self.walls,
-            (self.size_image, self.size_image))
-
-        self.hero = pygame.image.load(cta.HERO).convert_alpha()
-        self.hero = pygame.transform.scale(
-            self.hero,
-            (self.size_image, self.size_image))
-
-        self.guardian = pygame.image.load(cta.GUARDIAN).convert_alpha()
-        self.guardian = pygame.transform.scale(
-            self.guardian,
-            (self.size_image, self.size_image))
-
-        self.object0 = pygame.image.load(cta.OBJECT0).convert_alpha()
-        self.object0 = pygame.transform.scale(
-            self.object0,
-            (self.size_image, self.size_image))
-
-        self.object1 = pygame.image.load(cta.OBJECT1).convert_alpha()
-        self.object1 = pygame.transform.scale(
-            self.object1,
-            (self.size_image, self.size_image))
-
-        self.object2 = pygame.image.load(cta.OBJECT2).convert_alpha()
-        self.object2 = pygame.transform.scale(
-            self.object2,
-            (self.size_image, self.size_image))
+    def resize_img(self):
+        """This method resizes all images for the maze"""
+        for i in self.dict_img:
+            recup = self.dict_img[i]
+            self.dict_img[i] = pygame.transform.scale(
+                recup, (self.size_image, self.size_image))
 
     def welcome_game(self, welcome, start):
         """ This method allows to display the first home window,
@@ -169,24 +152,36 @@ class Graphics:
                 x_sprite = x_axis * self.size_image
                 y_sprite = y_axis * self.size_image
                 if case == "A":
-                    self.window.blit(self.background, (y_sprite, x_sprite))
-                    self.window.blit(self.guardian, (y_sprite, x_sprite))
+                    self.window.blit(
+                        self.dict_img["background"], (y_sprite, x_sprite))
+                    self.window.blit(
+                        self.dict_img["guardian"], (y_sprite, x_sprite))
                 if case == "#":
-                    self.window.blit(self.walls, (y_sprite, x_sprite))
+                    self.window.blit(
+                        self.dict_img["walls"], (y_sprite, x_sprite))
                 if case == "M":
-                    self.window.blit(self.background, (y_sprite, x_sprite))
-                    self.window.blit(self.hero, (y_sprite, x_sprite))
+                    self.window.blit(
+                        self.dict_img["background"], (y_sprite, x_sprite))
+                    self.window.blit(
+                        self.dict_img["hero"], (y_sprite, x_sprite))
                 if case == "_":
-                    self.window.blit(self.background, (y_sprite, x_sprite))
+                    self.window.blit(
+                        self.dict_img["background"], (y_sprite, x_sprite))
                 if case == "O0":
-                    self.window.blit(self.background, (y_sprite, x_sprite))
-                    self.window.blit(self.object0, (y_sprite, x_sprite))
+                    self.window.blit(
+                        self.dict_img["background"], (y_sprite, x_sprite))
+                    self.window.blit(
+                        self.dict_img["object0"], (y_sprite, x_sprite))
                 if case == "O1":
-                    self.window.blit(self.background, (y_sprite, x_sprite))
-                    self.window.blit(self.object1, (y_sprite, x_sprite))
+                    self.window.blit(
+                        self.dict_img["background"], (y_sprite, x_sprite))
+                    self.window.blit(
+                        self.dict_img["object1"], (y_sprite, x_sprite))
                 if case == "O2":
-                    self.window.blit(self.background, (y_sprite, x_sprite))
-                    self.window.blit(self.object2, (y_sprite, x_sprite))
+                    self.window.blit(
+                        self.dict_img["background"], (y_sprite, x_sprite))
+                    self.window.blit(
+                        self.dict_img["object2"], (y_sprite, x_sprite))
         font = pygame.font.SysFont("comicsansms", 40)
         text = font.render(
             "Items recovered : " + str(self.laby.user.objects_collect),
