@@ -45,7 +45,6 @@ class Graphics:
             self.dict_img[i] = pygame.transform.scale(
                 recup, (self.size_image, self.size_image))
 
-
     def welcome_game(self, welcome, start):
         """ This method allows to display the first home window,
         with the features of the game"""

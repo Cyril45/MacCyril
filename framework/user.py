@@ -3,6 +3,7 @@
 
 """This module contains all classes for the player"""
 
+
 class User:
     """This class creates a player"""
     def __init__(self, laby):
