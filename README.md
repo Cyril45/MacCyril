@@ -23,7 +23,7 @@ The required dependencies are indicated in the **requirement.txt** file
 
 ## Installation virtual environment (pypenv)
 
-Launch **pypenv install** 
+Launch **pipenv install** 
 
 ## Play
 
